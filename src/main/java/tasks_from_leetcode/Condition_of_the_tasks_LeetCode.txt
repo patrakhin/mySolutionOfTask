@@ -1,0 +1,141 @@
+Задача 1.
+RescueBoats
+
+Boats to Save People
+You are given an array people where people[i] is the weight of the ith person,
+and an infinite number of boats where each boat can carry a maximum weight of limit.
+Each boat carries at most two people at the same time, provided the sum of the weight of those people is at most limit.
+
+Return the minimum number of boats to carry every given person.
+//
+Вам дается массив людей, где люди[i] является вес своего человека, и бесконечное количество лодок,
+где каждая лодка может нести максимальный вес предела. Каждая лодка перевозит не более двух человек одновременно,
+при условии, что суммарный вес этих людей не превышает предела.
+
+Верните минимальное количество лодок для перевозки каждого конкретного человека.
+
+Example 1:
+Input: people = [1,2], limit = 3
+Output: 1
+Explanation: 1 boat (1, 2)
+Example 2:
+Input: people = [3,2,2,1], limit = 3
+Output: 3
+Explanation: 3 boats (1, 2), (2) and (3)
+Example 3:
+Input: people = [3,5,3,4], limit = 5
+Output: 4
+Explanation: 4 boats (3), (3), (4), (5)
+
+Constraints:
+•	1 <= people.length <= 5 * 10^4
+•	1 <= people[i] <= limit <= 3 * 10^4
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+Задача 2.
+StoneGame
+
+Alice and Bob play a game with piles of stones. There are an even number of piles arranged in a row,
+and each pile has a positive integer number of stones piles[i].
+The objective of the game is to end with the most stones. The total number of stones across all the piles is odd,
+so there are no ties.
+
+Alice and Bob take turns, with Alice starting first. Each turn,
+a player takes the entire pile of stones either from the beginning or from the end of the row.
+This continues until there are no more piles left, at which point the person with the most stones wins.
+
+Assuming Alice and Bob play optimally, return true if Alice wins the game, or false if Bob wins.
+
+Элис и Боб играют в игру с грудами камней. Рядно расположено чётное число свай,
+и каждая стопка имеет положительное целое число свай [i].
+Цель игры заключается в том, чтобы закончить с большим количеством камней.
+Общее количество камней на всех сваях нечётно, так что нет никаких связей.
+
+Элис и Боб по очереди, а Элис начинает первой. Каждый ход игрок берет всю кучу камней либо с начала,
+либо с конца ряда. Это продолжается до тех пор, пока не останется больше свай,
+и в этот момент побеждает человек с наибольшим количеством камней.
+
+Если Алиса и Боб играют оптимально, верните истину, если Алиса выиграет игру, или ложную, если Боб выиграет.
+/////////////////////////////////////////////////////////////////////////////////////////
+
+Задача 3.
+PrimePalindrome
+
+Given an integer n, return the smallest prime palindrome greater than or equal to n.
+An integer is prime if it has exactly two divisors: 1 and itself. Note that 1 is not a prime number.
+
+For example, 2, 3, 5, 7, 11, and 13 are all primes.
+An integer is a palindrome if it reads the same from left to right as it does from right to left.
+For example, 101 and 12321 are palindromes.
+The test cases are generated so that the answer always exists and is in the range [2, 2 * 10^8].
+
+Если задано целое число n, возвращаем наименьшее простое палиндром, большее или равное n.
+Целое число является простым, если оно имеет в точности два делителя: 1 и себя. Заметим, что 1 не является простым числом.
+
+Например, 2, 3, 5, 7, 11 и 13 являются простыми числами.
+Целое число является палиндромом, если оно читается слева направо, как и справа налево.
+Например, 101 и 12321 - палиндромы.
+Тестовые случаи генерируются таким образом, что ответ всегда существует и находится в диапазоне [2, 2 * 10^8].
+/////////////////////////////////////////////////////////////////////////////////////////
+
+Задача 4.
+CarFleet
+
+There are n cars going to the same destination along a one-lane road. The destination is target miles away.
+You are given two integer array position and speed, both of length n,
+where position[i] is the position of the ith car and speed[i] is the speed of the ith car (in miles per hour).
+A car can never pass another car ahead of it, but it can catch up to it and drive bumper to bumper at the same speed.
+The faster car will slow down to match the slower car's speed.
+The distance between these two cars is ignored (i.e., they are assumed to have the same position).
+
+A car fleet is some non-empty set of cars driving at the same position and same speed.
+Note that a single car is also a car fleet.
+If a car catches up to a car fleet right at the destination point, it will still be considered as one car fleet.
+Return the number of car fleets that will arrive at the destination.
+
+Есть n автомобилей, идущих в тот же пункт назначения по однополосной дороге. Цель находится в милях от цели.
+Вам дано два положения целочисленного массива и скорость, обе длины n,
+где положение[i] - положение автомобиля и скорость[i] - скорость автомобиля (в милях в час).
+Автомобиль никогда не может пройти другой автомобиль впереди его,
+но он может догнать его и управлять бампером на той же скорости.
+Более быстрый автомобиль замедлится, чтобы соответствовать более медленной скорости автомобиля.
+Расстояние между этими двумя автомобилями игнорируется (то есть предполагается, что они имеют одинаковое положение).
+
+Автопарк - это некий непустой набор легковых автомобилей, движущихся в том же положении и на той же скорости.
+Обратите внимание, что один автомобиль также является автопарком.
+Если автомобиль догоняет автопарк прямо в пункте назначения, он все равно будет рассматриваться как один автопарк.
+Верните количество автопарков, которые прибудут в пункт назначения.
+
+Example 1:
+
+Input: target = 12, position = [10,8,0,5,3], speed = [2,4,1,1,3]
+Output: 3
+Explanation:
+The cars starting at 10 (speed 2) and 8 (speed 4) become a fleet, meeting each other at 12.
+The car starting at 0 does not catch up to any other car, so it is a fleet by itself.
+The cars starting at 5 (speed 1) and 3 (speed 3) become a fleet, meeting each other at 6. The fleet moves at speed 1 until it reaches target.
+Note that no other cars meet these fleets before the destination, so the answer is 3.
+Example 2:
+
+Input: target = 10, position = [3], speed = [3]
+Output: 1
+Explanation: There is only one car, hence there is only one fleet.
+Example 3:
+
+Input: target = 100, position = [0,2,4], speed = [4,2,1]
+Output: 1
+Explanation:
+The cars starting at 0 (speed 4) and 2 (speed 2) become a fleet, meeting each other at 4. The fleet moves at speed 2.
+Then, the fleet (speed 2) and the car starting at 4 (speed 1) become one fleet, meeting each other at 6. The fleet moves at speed 1 until it reaches target.
+
+
+Constraints:
+
+n == position.length == speed.length
+1 <= n <= 105
+0 < target <= 106
+0 <= position[i] < target
+All the values of position are unique.
+0 < speed[i] <= 10^6
+/////////////////////////////////////////////////////////////////////////////////////////
