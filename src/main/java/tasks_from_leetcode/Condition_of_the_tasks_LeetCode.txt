@@ -139,3 +139,285 @@ n == position.length == speed.length
 All the values of position are unique.
 0 < speed[i] <= 10^6
 /////////////////////////////////////////////////////////////////////////////////////////
+
+Задача 5.
+Collisions
+
+Count Collisions on a Road
+There are n cars on an infinitely long road. The cars are numbered from 0 to n - 1 from left to right
+and each car is present at a unique point.
+You are given a 0-indexed string directions of length n. directions[i] can be either 'L', 'R', or 'S'
+denoting whether the ith car is moving towards the left, towards the right, or staying at its current point respectively. Each moving car has the same speed.
+
+The number of collisions can be calculated as follows:
+When two cars moving in opposite directions collide with each other, the number of collisions increases by 2.
+When a moving car collides with a stationary car, the number of collisions increases by 1.
+After a collision, the cars involved can no longer move and will stay at the point where they collided.
+Other than that, cars cannot change their state or direction of motion.
+
+Return the total number of collisions that will happen on the road.
+
+Существует n автомобилей на бесконечно длинной дороге. Автомобили пронумерованы от 0 до n - 1 слева направо
+и каждый автомобиль присутствует в уникальной точке.
+Вам заданы 0-индексированные направления строк длины n. направления[i] могут быть либо 'L', 'R', либо 'S', обозначая,
+движется ли его машина влево, вправо, или оставаться в своей текущей точке соответственно.
+Каждая движущаяся машина имеет одинаковую скорость.
+
+Число столкновений можно рассчитать следующим образом:
+Когда два автомобиля, движущиеся в противоположных направлениях, сталкиваются друг с другом,
+число столкновений увеличивается на 2.
+Когда движущийся автомобиль сталкивается с неподвижным автомобилем, число столкновений увеличивается на 1.
+После столкновения задействованные автомобили больше не могут двигаться и останутся в том месте,
+где они столкнулись. Кроме того, автомобили не могут изменять свое состояние или направление движения.
+
+Верните общее число столкновений, которые произойдут на дороге.
+
+Example 1:
+Input: directions = "RLRSLL"
+Output: 5
+Explanation:
+The collisions that will happen on the road are:
+- Cars 0 and 1 will collide with each other. Since they are moving in opposite directions,
+the number of collisions becomes 0 + 2 = 2.
+- Cars 2 and 3 will collide with each other. Since car 3 is stationary, the number of collisions becomes 2 + 1 = 3.
+- Cars 3 and 4 will collide with each other. Since car 3 is stationary, the number of collisions becomes 3 + 1 = 4.
+- Cars 4 and 5 will collide with each other. After car 4 collides with car 3,
+it will stay at the point of collision and get hit by car 5. The number of collisions becomes 4 + 1 = 5.
+Thus, the total number of collisions that will happen on the road is 5.
+
+Example 2:
+Input: directions = "LLRR"
+Output: 0
+Explanation:
+No cars will collide with each other. Thus, the total number of collisions that will happen on the road is 0.
+
+Constraints:
+
+1 <= directions.length <= 105
+directions[i] is either 'L', 'R', or 'S'.
+/////////////////////////////////////////////////////////////////////////////////////////
+
+Задача 6.
+LastMoment
+
+Last Moment Before All Ants Fall Out of a Plank
+We have a wooden plank of the length n units. Some ants are walking on the plank,
+each ant moves with a speed of 1 unit per second. Some of the ants move to the left, the other move to the right.
+When two ants moving in two different directions meet at some point,
+they change their directions and continue moving again. Assume changing directions does not take any additional time.
+When an ant reaches one end of the plank at a time t, it falls out of the plank immediately.
+Given an integer n and two integer arrays left and right, the positions of the ants moving to the left and the right,
+return the moment when the last ant(s) fall out of the plank.
+
+Последний момент перед тем, как все муравьи упадут с доски
+У нас есть деревянная доска длиной n единиц. Некоторые муравьи ходят по доске,
+каждый муравей движется со скоростью 1 единица в секунду. Некоторые муравьи двигаются влево, другие - вправо.
+Когда два муравья, двигаясь в двух разных направлениях, встречаются в какой-то момент,
+они меняют направление и продолжают двигаться снова.
+Предположим, что смена направления не требует дополнительного времени.
+Когда муравей достигает одного конца доски за раз t, он немедленно падает с доски.
+Если задано целое число n и два целых массива слева и справа, позиции муравьев, движущихся влево и вправо,
+возвращаются в момент, когда последний муравей(ы) выпадает из доски.
+
+Input: n = 4, left = [4,3], right = [0,1]
+Output: 4
+Explanation: In the image above:
+-The ant at index 0 is named A and going to the right.
+-The ant at index 1 is named B and going to the right.
+-The ant at index 3 is named C and going to the left.
+-The ant at index 4 is named D and going to the left.
+The last moment when an ant was on the plank is t = 4 seconds.
+After that, it falls immediately out of the plank.
+(i.e., We can say that at t = 4.0000000001, there are no ants on the plank).
+
+Input: n = 7, left = [], right = [0,1,2,3,4,5,6,7]
+Output: 7
+Explanation: All ants are going to the right, the ant at index 0 needs 7 seconds to fall
+
+Input: n = 7, left = [0,1,2,3,4,5,6,7], right = []
+Output: 7
+Explanation: All ants are going to the left, the ant at index 7 needs 7 seconds to fall.
+
+Constraints:
+
+1 <= n <= 104
+0 <= left.length <= n + 1
+0 <= left[i] <= n
+0 <= right.length <= n + 1
+0 <= right[i] <= n
+1 <= left.length + right.length <= n + 1
+All values of left and right are unique, and each value can appear only in one of the two arrays.
+/////////////////////////////////////////////////////////////////////////////////////////
+
+Задача 7.
+Cashier
+
+Apply Discount Every n Orders
+There is a supermarket that is frequented by many customers.
+The products sold at the supermarket are represented as two parallel integer arrays products and prices,
+where the ith product has an ID of products[i] and a price of prices[i].
+When a customer is paying, their bill is represented as two parallel integer arrays product and amount,
+where the jth product they purchased has an ID of product[j], and amount[j] is how much of the product they bought.
+Their subtotal is calculated as the sum of each amount[j] * (price of the jth product).
+
+The supermarket decided to have a sale. Every nth customer paying for their groceries will be given a percentage discount.
+The discount amount is given by discount, where they will be given discount percent off their subtotal.
+More formally, if their subtotal is bill, then they would actually pay bill * ((100 - discount) / 100).
+
+Implement the Cashier class:
+Cashier(int n, int discount, int[] products, int[] prices) Initializes the object with n,
+the discount, and the products and their prices.
+double getBill(int[] product, int[] amount) Returns the final total of the bill with the discount applied (if any).
+Answers within 10-5 of the actual value will be accepted.
+
+
+Применять скидку Каждый н заказы
+Существует супермаркет, который часто посещается многими клиентами. Продукты, продаваемые в супермаркете,
+представлены в виде двух параллельных целочисленных массивов продуктов и цен,
+где продукт имеет идентификатор продуктов[i] и цену цен[i].
+Когда клиент платит, его счет представлен в виде двух параллельных целочисленных массивов продукта и суммы,
+где jth продукт, который он купил, имеет идентификатор продукта[j], и сумма[j] это то,
+сколько продукта они купили. Их итоговая сумма рассчитывается как сумма каждой суммы[j] * (цена на jth-продукт).
+
+В супермаркете решили провести распродажу. Каждый десятый клиент, оплачивающий свои продукты, получит процентную скидку.
+Размер скидки определяется со скидкой, в соответствии с которой они получают процент скидки от общей суммы.
+Более формально, если их итогом будет счет, то они фактически будут платить счет * ((100 - скидка) / 100).
+
+Внедрить класс Кассира:
+
+Кассир(int n, int discount, int[] products, int[] prices) Инициализирует объект с n, скидкой, а также продуктами и их ценами.
+двойной getBill(int[] продукт, инт[] сумма) Возвращает окончательную сумму счета со скидкой применяется (если есть).
+Ответы принимаются в течение 10-5 от фактического значения.
+
+Example 1:
+
+Input
+["Cashier","getBill","getBill","getBill","getBill","getBill","getBill","getBill"]
+[[3,50,[1,2,3,4,5,6,7],[100,200,300,400,300,200,100]],[[1,2],[1,2]],[[3,7],[10,10]],
+[[1,2,3,4,5,6,7],[1,1,1,1,1,1,1]],[[4],[10]],[[7,3],[10,10]],[[7,5,3,1,6,4,2],[10,10,10,9,9,9,7]],[[2,3,5],[5,3,2]]]
+Output
+[null,500.0,4000.0,800.0,4000.0,4000.0,7350.0,2500.0]
+Explanation
+Cashier cashier = new Cashier(3,50,[1,2,3,4,5,6,7],[100,200,300,400,300,200,100]);
+cashier.getBill([1,2],[1,2]);                        // return 500.0. 1st customer, no discount.
+                                                     // bill = 1 * 100 + 2 * 200 = 500.
+cashier.getBill([3,7],[10,10]);                      // return 4000.0. 2nd customer, no discount.
+                                                     // bill = 10 * 300 + 10 * 100 = 4000.
+cashier.getBill([1,2,3,4,5,6,7],[1,1,1,1,1,1,1]);    // return 800.0. 3rd customer, 50% discount.
+                                                     // Original bill = 1600
+                                                     // Actual bill = 1600 * ((100 - 50) / 100) = 800.
+cashier.getBill([4],[10]);                           // return 4000.0. 4th customer, no discount.
+cashier.getBill([7,3],[10,10]);                      // return 4000.0. 5th customer, no discount.
+cashier.getBill([7,5,3,1,6,4,2],[10,10,10,9,9,9,7]); // return 7350.0. 6th customer, 50% discount.
+                                                     // Original bill = 14700, but with
+                                                     // Actual bill = 14700 * ((100 - 50) / 100) = 7350.
+cashier.getBill([2,3,5],[5,3,2]);                    // return 2500.0.  6th customer, no discount.
+
+
+Constraints:
+
+1 <= n <= 104
+0 <= discount <= 100
+1 <= products.length <= 200
+prices.length == products.length
+1 <= products[i] <= 200
+1 <= prices[i] <= 1000
+The elements in products are unique.
+1 <= product.length <= products.length
+amount.length == product.length
+product[j] exists in products.
+1 <= amount[j] <= 1000
+The elements of product are unique.
+At most 1000 calls will be made to getBill.
+Answers within 10-5 of the actual value will be accepted.
+/////////////////////////////////////////////////////////////////////////////////////////
+
+Задача 8.
+Discount
+
+Apply Discount to Prices
+A sentence is a string of single-space separated words where each word can contain digits,
+lowercase letters, and the dollar sign '$'. A word represents a price if it is a sequence of digits preceded by a dollar sign.
+For example, "$100", "$23", and "$6" represent prices while "100", "$", and "$1e5" do not.
+You are given a string sentence representing a sentence and an integer discount.
+For each word representing a price, apply a discount of discount% on the price and update the word in the sentence.
+All updated prices should be represented with exactly two decimal places.
+
+Return a string representing the modified sentence.
+Note that all prices will contain at most 10 digits.
+
+Применять скидку к ценам
+Предложение - это строка слов, разделенных пробелом, где каждое слово может содержать цифры,
+строчные буквы и знак доллара '$'. Слово представляет собой цену, если это последовательность цифр,
+предваряемых знаком доллара.
+Например, "$100", "$23" и "$6" означают цены, в то время как "100", "$" и "$1e5" - нет.
+Вам дается строковое предложение, представляющее предложение и целочисленную скидку.
+Для каждого слова, представляющего цену, примените скидку% на цену и обновите слово в предложении.
+Все обновленные цены должны быть представлены с точностью до двух десятичных знаков.
+
+Возвращает строку, представляющую измененное предложение.
+Обратите внимание, что все цены будут содержать не более 10 цифр.
+
+Example 1:
+
+Input: sentence = "there are $1 $2 and 5$ candies in the shop", discount = 50
+Output: "there are $0.50 $1.00 and 5$ candies in the shop"
+Explanation:
+The words which represent prices are "$1" and "$2".
+- A 50% discount on "$1" yields "$0.50", so "$1" is replaced by "$0.50".
+- A 50% discount on "$2" yields "$1".
+Since we need to have exactly 2 decimal places after a price, we replace "$2" with "$1.00".
+Example 2:
+
+Input: sentence = "1 2 $3 4 $5 $6 7 8$ $9 $10$", discount = 100
+Output: "1 2 $0.00 4 $0.00 $0.00 7 8$ $0.00 $10$"
+Explanation:
+Applying a 100% discount on any price will result in 0.
+The words representing prices are "$3", "$5", "$6", and "$9".
+Each of them is replaced by "$0.00".
+
+
+Constraints:
+
+1 <= sentence.length <= 105
+sentence consists of lowercase English letters, digits, ' ', and '$'.
+sentence does not have leading or trailing spaces.
+All words in sentence are separated by a single space.
+All prices will be positive numbers without leading zeros.
+All prices will have at most 10 digits.
+0 <= discount <= 100
+/////////////////////////////////////////////////////////////////////////////////////////
+
+Задача 9.
+MultiplyStrings
+
+Multiply Strings
+Given two non-negative integers num1 and num2 represented as strings,
+return the product of num1 and num2, also represented as a string.
+
+Note: You must not use any built-in BigInteger library or convert the inputs to integer directly.
+
+Умножать строки
+Если даны два неотрицательных целых числа num1 и num2, представленных как строки,
+возвращаем произведение num1 и num2, также представленное как строка.
+
+Примечание: Вы не должны использовать встроенную библиотеку BigInteger или конвертировать входные данные в целое.
+
+Example 1:
+
+Input: num1 = "2", num2 = "3"
+Output: "6"
+Example 2:
+
+Input: num1 = "123", num2 = "456"
+Output: "56088"
+
+
+Constraints:
+
+1 <= num1.length, num2.length <= 200
+num1 and num2 consist of digits only.
+Both num1 and num2 do not contain any leading zero, except the number 0 itself.
+/////////////////////////////////////////////////////////////////////////////////////////
+
+Задача 10.
