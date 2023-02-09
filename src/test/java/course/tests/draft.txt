@@ -1,0 +1,54 @@
+public class A3CalcLengthOfList {
+    private static final Logger logger = Logger.getLogger(A3CalcLengthOfList.class);
+    public static int getLengthOfList (LinkedList<Integer> inputList) {
+        int count = 0;
+        try {
+            inputList.pop();
+        } catch (RuntimeException e) {
+            return count ;
+        }
+        count = 1;
+        return count + getLengthOfList(inputList);
+        /*int count = 0;
+        if (inputList.isEmpty()) {
+            return count;
+        }
+        inputList.pop();
+        count = 1;
+        return count + getLengthOfList(inputList);*/
+
+
+    }
+
+    public static void main(String[] args) {
+        LinkedList<Integer> build = new LinkedList<>();
+        for (int i = 1; i < 6; i++) {
+            build.push(i);
+        }
+        logger.debug(getLengthOfList(build));
+    }
+}
+//
+
+
+// для тестов void создал поле Стринг туда складываю результат
+import java.util.*;
+
+public class A5PrintOnlyEvenValues {
+    private static final Logger logger = Logger.getLogger(A5PrintOnlyEvenValues.class);
+
+    public String onlyUseTest = "";
+    public A5PrintOnlyEvenValues () {
+    }
+
+    public void getEventValues (List<Integer> inputData, int startIndex) {
+        if (startIndex == inputData.size()) {
+            return;
+        }
+        if (inputData.get(startIndex) % 2 == 0) {
+            logger.debug(inputData.get(startIndex));
+            this.onlyUseTest = onlyUseTest + inputData.get(startIndex);
+        }
+        getEventValues(inputData, startIndex + 1);
+    }
+}
