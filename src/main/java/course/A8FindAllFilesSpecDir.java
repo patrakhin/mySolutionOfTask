@@ -6,12 +6,12 @@ import java.util.*;
 
 public class A8FindAllFilesSpecDir {
     private static final Logger logger = Logger.getLogger(A8FindAllFilesSpecDir.class);
-    private List<String> result = new ArrayList<>();
+    private List<String> searchResult = new ArrayList<>();
 
     public List<String> findFiles(String path) {
         File foundFolder = new File(path);
         findFilesRecursive(foundFolder);
-        return result;
+        return searchResult;
     }
 
     private void findFilesRecursive(File folder) {
@@ -21,7 +21,7 @@ public class A8FindAllFilesSpecDir {
         }
         for (File file : foundFiles) {
             if (file.isFile()) {
-                result.add(file.getAbsolutePath());
+                searchResult.add(file.getAbsolutePath());
             } else if (file.isDirectory()) {
                 findFilesRecursive(file);
             }
