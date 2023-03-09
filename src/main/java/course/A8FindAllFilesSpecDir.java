@@ -6,7 +6,7 @@ import java.util.*;
 
 public class A8FindAllFilesSpecDir {
     private static final Logger logger = Logger.getLogger(A8FindAllFilesSpecDir.class);
-    private List<String> searchResult = new ArrayList<>();
+    private final List<String> searchResult = new ArrayList<>();
 
     public List<String> findFiles(String path) {
         File foundFolder = new File(path);

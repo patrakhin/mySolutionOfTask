@@ -6,13 +6,13 @@ import java.util.*;
 
 public class A9GenerateAllTrueBrackets {
     private static final Logger logger = Logger.getLogger(A9GenerateAllTrueBrackets.class);
-    public static List<String> getAllTrueCombinations(int numberOfBrackets) {
+    public List<String> getAllTrueCombinations(int numberOfBrackets) {
         List<String> resultOfGenerations = new ArrayList<>();
         generatingCombos(numberOfBrackets, numberOfBrackets, "", resultOfGenerations);
         return resultOfGenerations;
     }
 
-    private static void generatingCombos(int leftBracket, int rightBracket, String combination, List<String> resultOfGenerations) {
+    private void generatingCombos(int leftBracket, int rightBracket, String combination, List<String> resultOfGenerations) {
         if (leftBracket == 0 && rightBracket == 0) {
             resultOfGenerations.add(combination);
             return;
@@ -28,8 +28,8 @@ public class A9GenerateAllTrueBrackets {
     }
 
     public static void main(String[] args) {
+        A9GenerateAllTrueBrackets allTrueBrackets = new A9GenerateAllTrueBrackets();
         int testValue = 3;
-        logger.debug(getAllTrueCombinations(testValue));
+        logger.debug(allTrueBrackets.getAllTrueCombinations(testValue));
     }
-
 }
