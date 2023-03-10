@@ -6,9 +6,9 @@ import java.util.*;
 
 public class A8FindAllFilesSpecDir {
     private static final Logger logger = Logger.getLogger(A8FindAllFilesSpecDir.class);
-    private final List<String> searchResult = new ArrayList<>();
 
     public List<String> findFiles(String path) {
+        List<String> searchResult = new ArrayList<>();
         File foundFolder = new File(path);
         findFilesRecursive(foundFolder, searchResult);
         return searchResult;
