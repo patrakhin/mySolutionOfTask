@@ -6,15 +6,15 @@ import java.util.*;
 
 public class A8FindAllFilesSpecDir {
     private static final Logger logger = Logger.getLogger(A8FindAllFilesSpecDir.class);
-    private  List<String> searchResult = new ArrayList<>();
+    private final List<String> searchResult = new ArrayList<>();
 
     public List<String> findFiles(String path) {
         File foundFolder = new File(path);
-        findFilesRecursive(foundFolder);
+        findFilesRecursive(foundFolder, searchResult);
         return searchResult;
     }
 
-    private void findFilesRecursive(File folder) {
+    private void findFilesRecursive(File folder, List<String> searchResult) {
         File[] foundFiles = folder.listFiles();
         if (foundFiles == null) {
             return;
@@ -23,7 +23,7 @@ public class A8FindAllFilesSpecDir {
             if (file.isFile()) {
                 searchResult.add(file.getAbsolutePath());
             } else if (file.isDirectory()) {
-                findFilesRecursive(file);
+                findFilesRecursive(file, searchResult);
             }
         }
     }
