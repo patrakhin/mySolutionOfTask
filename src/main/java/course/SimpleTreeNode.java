@@ -27,7 +27,11 @@ public class SimpleTreeNode<T>
         Root = root;
     }
 
-    public void AddChild(SimpleTreeNode<T> ParentNode, SimpleTreeNode<T> NewChild)
+     public SimpleTreeNode<T> getRoot() {
+         return Root;
+     }
+
+     public void AddChild(SimpleTreeNode<T> ParentNode, SimpleTreeNode<T> NewChild)
     {
         if (ParentNode.Children == null) {
             ParentNode.Children = new ArrayList<>();
@@ -134,5 +138,7 @@ public class SimpleTreeNode<T>
             }
         }
     }
-}
+
+ }
+
 
