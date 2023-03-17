@@ -122,55 +122,47 @@ class BST<T> {
 
     public boolean DeleteNodeByKey(int key) {
         // search for the node with the given key
-        BSTFind<T> findNode = FindNodeByKey(key);
-        if (!findNode.NodeHasKey) {
-            // if the node doesn't exist, return false
+        BSTFind<T> findResult = FindNodeByKey(key);
+        // if the node doesn't exist, return false
+        if (!findResult.NodeHasKey) {
             return false;
         }
         // get the node to be deleted
-        BSTNode<T> currentNode = findNode.Node;
-
-        if (currentNode.LeftChild == null && currentNode.RightChild == null) {
-            // case 1: remove a leaf
-            if (currentNode.Parent == null) {
-                // if this root
-                Root = null;
-            } else {
-                if (currentNode.Parent.LeftChild == currentNode) {
-                    // if the current node is the left child of its parent
-                    currentNode.Parent.LeftChild = null;
-                } else {
-                    //if the current node is the right child of its parent
-                    currentNode.Parent.RightChild = null;
-                }
+        BSTNode<T> nodeToDelete = findResult.Node;
+        // if the node has two children, replace it with its successor
+        if (nodeToDelete.LeftChild != null && nodeToDelete.RightChild != null) {
+            // find the successor node
+            BSTNode<T> successorNode = nodeToDelete.RightChild;
+            while (successorNode.LeftChild != null) {
+                successorNode = successorNode.LeftChild;
             }
-        } else if (currentNode.LeftChild != null && currentNode.RightChild != null) {
-            // case 2: deleting a node with two children
-            BSTNode<T> minRight = FinMinMax(currentNode.RightChild, false);
-            currentNode.NodeKey = minRight.NodeKey;
-            currentNode.NodeValue = minRight.NodeValue;
-            // remove the node that we took as a replacement
-            currentNode = minRight;
+            // replace the node to be deleted with its successor
+            nodeToDelete.NodeKey = successorNode.NodeKey;
+            nodeToDelete.NodeValue = successorNode.NodeValue;
+            nodeToDelete = successorNode;
+        }
+        // get the parent node of the node to be deleted
+        BSTNode<T> parentNode = nodeToDelete.Parent;
+        // get the child node of the node to be deleted
+        BSTNode<T> childNode = nodeToDelete.LeftChild != null ? nodeToDelete.LeftChild : nodeToDelete.RightChild;
+        // remove the node to be deleted from the tree
+        if (childNode != null) {
+            // the node to be deleted has a child node, replace it with the child node
+            childNode.Parent = parentNode;
+        }
+        if (parentNode == null) {
+            // the node to be deleted is the root node, update the root node
+            Root = childNode;
+        } else if (nodeToDelete == parentNode.LeftChild) {
+            // the node to be deleted is the left child of the parent node
+            parentNode.LeftChild = childNode;
         } else {
-            //case 3: deleting a node with one child
-            BSTNode<T> child = (currentNode.LeftChild != null) ? currentNode.LeftChild : currentNode.RightChild;
-
-            if (currentNode.Parent == null) {
-                // if this root
-                Root = child;
-            } else {
-                if (currentNode.Parent.LeftChild == currentNode) {
-                    // if the current node is the left child of its parent
-                    currentNode.Parent.LeftChild = child;
-                } else {
-                    // if the current node is the right child of its parent
-                    currentNode.Parent.RightChild = child;
-                }
-                child.Parent = currentNode.Parent;
-            }
+            // the node to be deleted is the right child of the parent node
+            parentNode.RightChild = childNode;
         }
         return true;
     }
+
 
     public int Count() {
         // start counting from the root node
