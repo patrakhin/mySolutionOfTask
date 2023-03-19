@@ -178,65 +178,54 @@ class BST<T> {
     }
 
     //tree width traverse
-    public ArrayList<BSTNode> WideAllNodes()
-    {
-        ArrayList<BSTNode> allNodes = new ArrayList<>();
+    public ArrayList<BSTNode> WideAllNodes() {
+        ArrayList<BSTNode> result = new ArrayList<>();
         if (Root == null) {
-            return allNodes;
+            return result;
         }
         Queue<BSTNode> queue = new LinkedList<>();
         queue.add(Root);
         while (!queue.isEmpty()) {
-            BSTNode current = queue.remove();
-            allNodes.add(current);
-            if (current.LeftChild != null) {
-                queue.add(current.LeftChild);
+            BSTNode node = queue.remove();
+            result.add(node);
+            if (node.LeftChild != null) {
+                queue.add(node.LeftChild);
             }
-            if (current.RightChild != null) {
-                queue.add(current.RightChild);
+            if (node.RightChild != null) {
+                queue.add(node.RightChild);
             }
         }
-        return allNodes;
+        return result;
     }
 
+
     //tree depth traversal and receiving values 0 (in-order), 1 (post-order) and 2 (pre-order)
-    public ArrayList<BSTNode> DeepAllNodes(int order)
-    {
-        ArrayList<BSTNode> allNodes = new ArrayList<>();
+    public ArrayList<BSTNode> DeepAllNodes(int order) {
+        ArrayList<BSTNode> nodeList = new ArrayList<BSTNode>();
         if (Root == null) {
-            return allNodes;
+            return nodeList;
         }
-        Stack<BSTNode> stack = new Stack<>();
-        stack.push(Root);
-        while (!stack.empty()) {
-            BSTNode current = stack.pop();
-            if (order == 0) { // in-order
-                if (current.RightChild != null) {
-                    stack.push(current.RightChild);
-                }
-                stack.push(current);
-                if (current.LeftChild != null) {
-                    stack.push(current.LeftChild);
-                }
-            } else if (order == 1) { // post-order
-                allNodes.add(current);
-                if (current.RightChild != null) {
-                    stack.push(current.RightChild);
-                }
-                if (current.LeftChild != null) {
-                    stack.push(current.LeftChild);
-                }
-            } else if (order == 2) { // pre-order
-                if (current.RightChild != null) {
-                    stack.push(current.RightChild);
-                }
-                if (current.LeftChild != null) {
-                    stack.push(current.LeftChild);
-                }
-                stack.push(current);
-            }
+        deepAllNodesHelper(Root, nodeList, order);
+        return nodeList;
+    }
+
+    private void deepAllNodesHelper(BSTNode node, ArrayList<BSTNode> nodeList, int order) {
+        if (node == null) {
+            return;
         }
-        return allNodes;
+        if (order == 0) { // in-order
+            deepAllNodesHelper(node.LeftChild, nodeList, order);
+            nodeList.add(node);
+            deepAllNodesHelper(node.RightChild, nodeList, order);
+        } else if (order == 1) { // post-order
+            deepAllNodesHelper(node.LeftChild, nodeList, order);
+            deepAllNodesHelper(node.RightChild, nodeList, order);
+            nodeList.add(node);
+        } else if (order == 2) { // pre-order
+            nodeList.add(node);
+            deepAllNodesHelper(node.LeftChild, nodeList, order);
+            deepAllNodesHelper(node.RightChild, nodeList, order);
+        }
     }
 
 }
