@@ -178,16 +178,16 @@ class BST<T> {
     }
 
     //tree width traverse
-    public ArrayList<BSTNode<T>> WideAllNodes()
+    public ArrayList<BSTNode> WideAllNodes()
     {
-        ArrayList<BSTNode<T>> allNodes = new ArrayList<>();
+        ArrayList<BSTNode> allNodes = new ArrayList<>();
         if (Root == null) {
             return allNodes;
         }
-        Queue<BSTNode<T>> queue = new LinkedList<>();
+        Queue<BSTNode> queue = new LinkedList<>();
         queue.add(Root);
         while (!queue.isEmpty()) {
-            BSTNode<T> current = queue.remove();
+            BSTNode current = queue.remove();
             allNodes.add(current);
             if (current.LeftChild != null) {
                 queue.add(current.LeftChild);
@@ -200,16 +200,16 @@ class BST<T> {
     }
 
     //tree depth traversal and receiving values 0 (in-order), 1 (post-order) and 2 (pre-order)
-    public ArrayList<BSTNode<T>> DeepAllNodes(int order)
+    public ArrayList<BSTNode> DeepAllNodes(int order)
     {
-        ArrayList<BSTNode<T>> allNodes = new ArrayList<>();
+        ArrayList<BSTNode> allNodes = new ArrayList<>();
         if (Root == null) {
             return allNodes;
         }
-        Stack<BSTNode<T>> stack = new Stack<>();
+        Stack<BSTNode> stack = new Stack<>();
         stack.push(Root);
         while (!stack.empty()) {
-            BSTNode<T> current = stack.pop();
+            BSTNode current = stack.pop();
             if (order == 0) { // in-order
                 if (current.RightChild != null) {
                     stack.push(current.RightChild);
