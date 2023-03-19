@@ -177,4 +177,67 @@ class BST<T> {
         return 1 + CountRecursive(node.LeftChild) + CountRecursive(node.RightChild);
     }
 
+    //tree width traverse
+    public ArrayList<BSTNode<T>> WideAllNodes()
+    {
+        ArrayList<BSTNode<T>> allNodes = new ArrayList<>();
+        if (Root == null) {
+            return allNodes;
+        }
+        Queue<BSTNode<T>> queue = new LinkedList<>();
+        queue.add(Root);
+        while (!queue.isEmpty()) {
+            BSTNode<T> current = queue.remove();
+            allNodes.add(current);
+            if (current.LeftChild != null) {
+                queue.add(current.LeftChild);
+            }
+            if (current.RightChild != null) {
+                queue.add(current.RightChild);
+            }
+        }
+        return allNodes;
+    }
+
+    //tree depth traversal and receiving values 0 (in-order), 1 (post-order) and 2 (pre-order)
+    public ArrayList<BSTNode<T>> DeepAllNodes(int order)
+    {
+        ArrayList<BSTNode<T>> allNodes = new ArrayList<>();
+        if (Root == null) {
+            return allNodes;
+        }
+        Stack<BSTNode<T>> stack = new Stack<>();
+        stack.push(Root);
+        while (!stack.empty()) {
+            BSTNode<T> current = stack.pop();
+            if (order == 0) { // in-order
+                if (current.RightChild != null) {
+                    stack.push(current.RightChild);
+                }
+                stack.push(current);
+                if (current.LeftChild != null) {
+                    stack.push(current.LeftChild);
+                }
+            } else if (order == 1) { // post-order
+                allNodes.add(current);
+                if (current.RightChild != null) {
+                    stack.push(current.RightChild);
+                }
+                if (current.LeftChild != null) {
+                    stack.push(current.LeftChild);
+                }
+            } else if (order == 2) { // pre-order
+                if (current.RightChild != null) {
+                    stack.push(current.RightChild);
+                }
+                if (current.LeftChild != null) {
+                    stack.push(current.LeftChild);
+                }
+                stack.push(current);
+            }
+        }
+        return allNodes;
+    }
+
 }
+
