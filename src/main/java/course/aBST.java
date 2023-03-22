@@ -59,7 +59,7 @@ class aBST
         }
         if (indexKeyAdded < Tree.length) {
             Tree[indexKeyAdded] = key;
-            return -indexKeyAdded; // new key added
+            return indexKeyAdded; // new key added
         } else {
             return -1; // array is full
         }
