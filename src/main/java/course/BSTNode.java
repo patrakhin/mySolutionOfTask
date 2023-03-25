@@ -50,14 +50,10 @@ class BalancedBST {
             return true;
         }
 
-        int left_height = GetHeight(root_node.LeftChild);
-        int right_height = GetHeight(root_node.RightChild);
+        int leftHeight = GetHeight(root_node.LeftChild);
+        int rightHeight = GetHeight(root_node.RightChild);
 
-        if (Math.abs(left_height - right_height) <= 1 && IsBalanced(root_node.LeftChild) && IsBalanced(root_node.RightChild)) {
-            return true;
-        }
-
-        return false;
+        return Math.abs(leftHeight - rightHeight) <= 1 && IsBalanced(root_node.LeftChild) && IsBalanced(root_node.RightChild);
     }
 
     private int GetHeight(BSTNode node) {
