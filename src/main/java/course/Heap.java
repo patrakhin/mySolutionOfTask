@@ -4,7 +4,7 @@ import java.util.*;
 
 class Heap
 {
-    public int [] HeapArray; // хранит неотрицательные числа-ключи
+    public int [] HeapArray; // store non-negative key numbers
 
     public Heap() { HeapArray = null; }
 
