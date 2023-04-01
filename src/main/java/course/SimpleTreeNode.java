@@ -139,39 +139,41 @@ public class SimpleTreeNode<T>
         }
     }
 
-     public ArrayList<T> EvenTrees()
-     {
+     public ArrayList<T> EvenTrees() {
          ArrayList<T> result = new ArrayList<T>();
-         if (Root == null) return result;
-
-         // First set the level of each node
-         setLevels();
-
-         // Use a deque to perform a level-order traversal
-         Deque<SimpleTreeNode<T>> deque = new ArrayDeque<>();
-         deque.add(Root);
-
-         // Iterate over the deque to identify subtrees with even number of nodes
-         while (!deque.isEmpty()) {
-             SimpleTreeNode<T> node = deque.poll();
-
-             // Check if the current node has an even number of descendants (including itself)
-             int subtreeSize = 1; // Include current node in the subtree size
-             if (node.Children != null) {
-                 subtreeSize += node.Children.size();
-                 for (SimpleTreeNode<T> child : node.Children) {
-                     deque.add(child);
-                 }
-             }
-
-             // If the subtree has an even number of nodes, add the parent node to the result
-             if (subtreeSize % 2 == 0 && node.Parent != null) {
-                 result.add(node.Parent.NodeValue);
-             }
+         // Check for an empty tree
+         if (this.Root == null) {
+             return result;
          }
-
+         // Recursive call to helper function
+         removeEdgesWithOddChildren(this.Root, result);
          return result;
      }
+
+     // Helper recursive function to remove edges
+     private int removeEdgesWithOddChildren(SimpleTreeNode<T> node, ArrayList<T> result) {
+         // If the current node is empty, then return 0 children
+         if (node == null) {
+             return 0;
+         }
+         // Counter to store the number of children
+         int count = 1;
+         // Recursively process all children of the current node
+         for (int i = 0; i < node.Children.size(); i++) {
+             SimpleTreeNode<T> child = node.Children.get(i);
+             int childCount = removeEdgesWithOddChildren(child, result);
+             count += childCount;
+             // If the child has an even number of children, then remove the edge between them
+             if (childCount % 2 == 0) {
+                 node.Children.remove(i);
+                 result.add(node.NodeValue);
+                 result.add(child.NodeValue);
+                 i--;
+             }
+         }
+         return count;
+     }
+
 
  }
 
