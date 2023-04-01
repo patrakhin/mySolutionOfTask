@@ -144,27 +144,30 @@ public class SimpleTreeNode<T>
          if (Root == null) {
              return result;
          }
-         setLevels();
-         Queue<SimpleTreeNode<T>> queue = new LinkedList<>();
-         queue.add(Root);
-         while (!queue.isEmpty()) {
-             SimpleTreeNode<T> node = queue.remove();
-             if (node.Children != null) {
-                 for (SimpleTreeNode<T> child : node.Children) {
-                     queue.add(child);
-                 }
-                 if (node != Root && node.Children.size() % 2 == 0) {
-                     SimpleTreeNode<T> parent = node.Parent;
-                     parent.Children.remove(node);
-                     for (SimpleTreeNode<T> child : node.Children) {
-                         AddChild(parent, child);
-                     }
-                     result.add(parent.NodeValue);
-                     result.add(node.NodeValue);
-                 }
+         int[] count = new int[1]; // use an array to store the count so it can be modified by the recursive method
+         removeEdges(Root, count, result);
+         return result;
+     }
+
+     private void removeEdges(SimpleTreeNode<T> node, int[] count, ArrayList<T> result) {
+         if (node.Children == null) {
+             return;
+         }
+         int numChildren = node.Children.size();
+         for (int i = 0; i < numChildren; i++) {
+             SimpleTreeNode<T> child = node.Children.get(i);
+             removeEdges(child, count, result);
+             if (child.Children != null && child.Children.size() % 2 == 0) {
+                 // if the child has an even number of children, remove the edge between the child and the parent
+                 count[0]++;
+                 result.add(node.NodeValue);
+                 result.add(child.NodeValue);
+                 node.Children.remove(child);
+                 child.Parent = null;
+                 numChildren--;
+                 i--;
              }
          }
-         return result;
      }
  }
 
