@@ -139,36 +139,40 @@ public class SimpleTreeNode<T>
         }
     }
 
-     public ArrayList<T> EvenTrees() {
-         ArrayList<T> result = new ArrayList<>();
-         if (Root == null) {
-             return result;
+     public ArrayList<T> EvenTrees()
+     {
+         ArrayList<T> result = new ArrayList<T>();
+         if (Root == null) return result;
+
+         // First set the level of each node
+         setLevels();
+
+         // Use a deque to perform a level-order traversal
+         Deque<SimpleTreeNode<T>> deque = new ArrayDeque<>();
+         deque.add(Root);
+
+         // Iterate over the deque to identify subtrees with even number of nodes
+         while (!deque.isEmpty()) {
+             SimpleTreeNode<T> node = deque.poll();
+
+             // Check if the current node has an even number of descendants (including itself)
+             int subtreeSize = 1; // Include current node in the subtree size
+             if (node.Children != null) {
+                 subtreeSize += node.Children.size();
+                 for (SimpleTreeNode<T> child : node.Children) {
+                     deque.add(child);
+                 }
+             }
+
+             // If the subtree has an even number of nodes, add the parent node to the result
+             if (subtreeSize % 2 == 0 && node.Parent != null) {
+                 result.add(node.Parent.NodeValue);
+             }
          }
-         int[] count = new int[1]; // use an array to store the count so it can be modified by the recursive method
-         removeEdges(Root, count, result);
+
          return result;
      }
 
-     private void removeEdges(SimpleTreeNode<T> node, int[] count, ArrayList<T> result) {
-         if (node.Children == null) {
-             return;
-         }
-         int numChildren = node.Children.size();
-         for (int i = 0; i < numChildren; i++) {
-             SimpleTreeNode<T> child = node.Children.get(i);
-             removeEdges(child, count, result);
-             if (child.Children != null && child.Children.size() % 2 == 0) {
-                 // if the child has an even number of children, remove the edge between the child and the parent
-                 count[0]++;
-                 result.add(node.NodeValue);
-                 result.add(child.NodeValue);
-                 node.Children.remove(child);
-                 child.Parent = null;
-                 numChildren--;
-                 i--;
-             }
-         }
-     }
  }
 
 
