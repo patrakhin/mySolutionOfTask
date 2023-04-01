@@ -139,29 +139,33 @@ public class SimpleTreeNode<T>
         }
     }
 
-     public ArrayList<T> EvenTrees()
-     {
+     public ArrayList<T> EvenTrees() {
          ArrayList<T> result = new ArrayList<>();
          if (Root == null) {
              return result;
          }
          setLevels();
-         int totalEvenNodes = 0;
-         for (SimpleTreeNode<T> node : GetAllNodes()) {
-             if (node.Children != null && node.Children.size() % 2 == 0) {
-                 totalEvenNodes++;
-             }
-         }
-         for (SimpleTreeNode<T> node : GetAllNodes()) {
-             if (node != Root && node.Parent.Children.size() % 2 == 0 && (node.Children == null || node.Children.size() % 2 == 0)) {
-                 result.add(node.Parent.NodeValue);
-                 result.add(node.NodeValue);
-                 node.Parent.Children.remove(node);
+         Queue<SimpleTreeNode<T>> queue = new LinkedList<>();
+         queue.add(Root);
+         while (!queue.isEmpty()) {
+             SimpleTreeNode<T> node = queue.remove();
+             if (node.Children != null) {
+                 for (SimpleTreeNode<T> child : node.Children) {
+                     queue.add(child);
+                 }
+                 if (node != Root && node.Children.size() % 2 == 0) {
+                     SimpleTreeNode<T> parent = node.Parent;
+                     parent.Children.remove(node);
+                     for (SimpleTreeNode<T> child : node.Children) {
+                         AddChild(parent, child);
+                     }
+                     result.add(parent.NodeValue);
+                     result.add(node.NodeValue);
+                 }
              }
          }
          return result;
      }
-
  }
 
 
