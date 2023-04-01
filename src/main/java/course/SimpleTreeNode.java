@@ -139,6 +139,29 @@ public class SimpleTreeNode<T>
         }
     }
 
+     public ArrayList<T> EvenTrees()
+     {
+         ArrayList<T> result = new ArrayList<>();
+         if (Root == null) {
+             return result;
+         }
+         setLevels();
+         int totalEvenNodes = 0;
+         for (SimpleTreeNode<T> node : GetAllNodes()) {
+             if (node.Children != null && node.Children.size() % 2 == 0) {
+                 totalEvenNodes++;
+             }
+         }
+         for (SimpleTreeNode<T> node : GetAllNodes()) {
+             if (node != Root && node.Parent.Children.size() % 2 == 0 && (node.Children == null || node.Children.size() % 2 == 0)) {
+                 result.add(node.Parent.NodeValue);
+                 result.add(node.NodeValue);
+                 node.Parent.Children.remove(node);
+             }
+         }
+         return result;
+     }
+
  }
 
 
