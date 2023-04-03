@@ -140,40 +140,28 @@ public class SimpleTreeNode<T>
     }
 
      public ArrayList<T> EvenTrees() {
-         ArrayList<T> result = new ArrayList<T>();
-         // Check for an empty tree
-         if (this.Root == null) {
-             return result;
-         }
-         // Recursive call to helper function
-         removeEdgesWithOddChildren(this.Root, result);
-         return result;
-     }
 
-     // Helper recursive function to remove edges
-     private int removeEdgesWithOddChildren(SimpleTreeNode<T> node, ArrayList<T> result) {
-         // If the current node is empty, then return 0 children
-         if (node == null) {
-             return 0;
-         }
-         // Counter to store the number of children
-         int count = 1;
-         // Recursively process all children of the current node
-         for (int i = 0; i < node.Children.size(); i++) {
-             SimpleTreeNode<T> child = node.Children.get(i);
-             int childCount = removeEdgesWithOddChildren(child, result);
-             count += childCount;
-             // If the child has an even number of children, then remove the edge between them
-             if (childCount % 2 == 0) {
-                 node.Children.remove(i);
-                 result.add(node.NodeValue);
-                 result.add(child.NodeValue);
-                 i--;
+         ArrayList<T> candidatesForDelete = new ArrayList<>();
+         SimpleTreeNode<T> node = Root;
+
+         List<SimpleTreeNode<T>> storageTemp = new ArrayList<>();
+         storageTemp.add(node);
+
+         while (!storageTemp.isEmpty()) {
+             node = storageTemp.remove(0);
+             SimpleTree<T> subTree = new SimpleTree<>(node); // create a subtree starting from the root
+
+             // work only with even trees
+             if (subTree.Count() % 2 == 0) { // Count - method is here
+                 if (node.Parent != null) { // if we are not on the first (root) node of the tree
+                     candidatesForDelete.add(node.Parent.NodeValue);
+                     candidatesForDelete.add(node.NodeValue);
+                 }
+                 storageTemp.addAll(node.Children);
              }
          }
-         return count;
+         return candidatesForDelete;
      }
-
 
  }
 
