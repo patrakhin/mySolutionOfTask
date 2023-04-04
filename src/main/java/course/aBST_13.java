@@ -1,12 +1,10 @@
 package course;
 
-import java.util.*;
-
-class aBST
+class aBST_13
 {
     public Integer Tree []; // keys array
 
-    public aBST(int depth)
+    public aBST_13(int depth)
     {
         //calculating array size for depth tree "depth":
         int tree_size = (int) Math.pow(2, depth + 1) - 1;
