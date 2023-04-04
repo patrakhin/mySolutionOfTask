@@ -149,7 +149,7 @@ public class SimpleTreeNode_16<T>
 
          while (!storageTemp.isEmpty()) {
              node = storageTemp.remove(0);
-             SimpleTree_10<T> subTree = new SimpleTree_10<>(node); // create a subtree starting from the root
+             SimpleTree<T> subTree = new SimpleTree<>(node); // create a subtree starting from the root
 
              // work only with even trees
              if (subTree.Count() % 2 == 0) { // Count - method is here
