@@ -2,15 +2,15 @@ package course;
 
 import java.util.*;
 
-public class SimpleTreeNode<T>
+public class SimpleTreeNode_10<T>
 {
     public T NodeValue; // node value
-    public SimpleTreeNode<T> Parent; // parent or null for root
-    public List<SimpleTreeNode<T>> Children; // list of child nodes or null
+    public SimpleTreeNode_10<T> Parent; // parent or null for root
+    public List<SimpleTreeNode_10<T>> Children; // list of child nodes or null
 
     public int level; // node level
 
-    public SimpleTreeNode(T val, SimpleTreeNode<T> parent)
+    public SimpleTreeNode_10(T val, SimpleTreeNode_10<T> parent)
     {
         NodeValue = val;
         Parent = parent;
@@ -18,20 +18,20 @@ public class SimpleTreeNode<T>
     }
 }
 
- class SimpleTree<T>
+ class SimpleTree_10<T>
  {
-    public SimpleTreeNode<T> Root; //root, can be null
+    public SimpleTreeNode_10<T> Root; //root, can be null
 
-    public SimpleTree(SimpleTreeNode<T> root)
+    public SimpleTree_10(SimpleTreeNode_10<T> root)
     {
         Root = root;
     }
 
-     public SimpleTreeNode<T> getRoot() {
+     public SimpleTreeNode_10<T> getRoot() {
          return Root;
      }
 
-     public void AddChild(SimpleTreeNode<T> ParentNode, SimpleTreeNode<T> NewChild)
+     public void AddChild(SimpleTreeNode_10<T> ParentNode, SimpleTreeNode_10<T> NewChild)
     {
         if (ParentNode.Children == null) {
             ParentNode.Children = new ArrayList<>();
@@ -42,7 +42,7 @@ public class SimpleTreeNode<T>
         //New child node add code to existing ParentNode
     }
 
-    public void DeleteNode(SimpleTreeNode<T> NodeToDelete)
+    public void DeleteNode(SimpleTreeNode_10<T> NodeToDelete)
     {
         if (NodeToDelete == Root) {
             Root = null;
@@ -52,14 +52,14 @@ public class SimpleTreeNode<T>
         //delete code for an existing NodeToDelete node
     }
 
-    public List<SimpleTreeNode<T>> GetAllNodes()
+    public List<SimpleTreeNode_10<T>> GetAllNodes()
     {
-        List<SimpleTreeNode<T>> nodes = new ArrayList<>();
+        List<SimpleTreeNode_10<T>> nodes = new ArrayList<>();
         if (Root != null) {
-            Queue<SimpleTreeNode<T>> queue = new LinkedList<>();
+            Queue<SimpleTreeNode_10<T>> queue = new LinkedList<>();
             queue.add(Root);
             while (!queue.isEmpty()) {
-                SimpleTreeNode<T> node = queue.remove();
+                SimpleTreeNode_10<T> node = queue.remove();
                 nodes.add(node);
                 if (node.Children != null) {
                     queue.addAll(node.Children);
@@ -70,14 +70,14 @@ public class SimpleTreeNode<T>
         //code of all tree nodes in certain order
     }
 
-    public List<SimpleTreeNode<T>> FindNodesByValue(T val)
+    public List<SimpleTreeNode_10<T>> FindNodesByValue(T val)
     {
-        List<SimpleTreeNode<T>> nodes = new ArrayList<>();
+        List<SimpleTreeNode_10<T>> nodes = new ArrayList<>();
         if (Root != null) {
-            Queue<SimpleTreeNode<T>> queue = new LinkedList<>();
+            Queue<SimpleTreeNode_10<T>> queue = new LinkedList<>();
             queue.add(Root);
             while (!queue.isEmpty()) {
-                SimpleTreeNode<T> node = queue.remove();
+                SimpleTreeNode_10<T> node = queue.remove();
                 if (node.NodeValue.equals(val)) {
                     nodes.add(node);
                 }
@@ -90,7 +90,7 @@ public class SimpleTreeNode<T>
         //node search code by value
     }
 
-    public void MoveNode(SimpleTreeNode<T> OriginalNode, SimpleTreeNode<T> NewParent)
+    public void MoveNode(SimpleTreeNode_10<T> OriginalNode, SimpleTreeNode_10<T> NewParent)
     {
         DeleteNode(OriginalNode);
         AddChild(NewParent, OriginalNode);
@@ -108,10 +108,10 @@ public class SimpleTreeNode<T>
     {
         int count = 0;
         if (Root != null) {
-            Queue<SimpleTreeNode<T>> queue = new LinkedList<>();
+            Queue<SimpleTreeNode_10<T>> queue = new LinkedList<>();
             queue.add(Root);
             while (!queue.isEmpty()) {
-                SimpleTreeNode<T> node = queue.remove();
+                SimpleTreeNode_10<T> node = queue.remove();
                 if (node.Children == null || node.Children.isEmpty()) {
                     count++;
                 } else {
@@ -126,12 +126,12 @@ public class SimpleTreeNode<T>
     public void setLevels() {
         if (Root == null) return;
         Root.level = 0;
-        Queue<SimpleTreeNode<T>> queue = new LinkedList<>();
+        Queue<SimpleTreeNode_10<T>> queue = new LinkedList<>();
         queue.add(Root);
         while (!queue.isEmpty()) {
-            SimpleTreeNode<T> node = queue.remove();
+            SimpleTreeNode_10<T> node = queue.remove();
             if (node.Children != null) {
-                for (SimpleTreeNode<T> child : node.Children) {
+                for (SimpleTreeNode_10<T> child : node.Children) {
                     child.level = node.level + 1;
                     queue.add(child);
                 }
@@ -139,30 +139,4 @@ public class SimpleTreeNode<T>
         }
     }
 
-     public ArrayList<T> EvenTrees() {
-
-         ArrayList<T> candidatesForDelete = new ArrayList<>();
-         SimpleTreeNode<T> node = Root;
-
-         List<SimpleTreeNode<T>> storageTemp = new ArrayList<>();
-         storageTemp.add(node);
-
-         while (!storageTemp.isEmpty()) {
-             node = storageTemp.remove(0);
-             SimpleTree<T> subTree = new SimpleTree<>(node); // create a subtree starting from the root
-
-             // work only with even trees
-             if (subTree.Count() % 2 == 0) { // Count - method is here
-                 if (node.Parent != null) { // if we are not on the first (root) node of the tree
-                     candidatesForDelete.add(node.Parent.NodeValue);
-                     candidatesForDelete.add(node.NodeValue);
-                 }
-                 storageTemp.addAll(node.Children);
-             }
-         }
-         return candidatesForDelete;
-     }
-
  }
-
-
