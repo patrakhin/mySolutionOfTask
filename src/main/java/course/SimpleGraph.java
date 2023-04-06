@@ -4,8 +4,11 @@ import java.util.*;
 
 class Vertex {
     public int Value;
-    public Vertex(int val) {
+    public boolean Hit;
+    public Vertex(int val)
+    {
         Value = val;
+        Hit = false;
     }
 }
 
@@ -60,5 +63,59 @@ class SimpleGraph {
             m_adjacency[v2][v1] = 0;
         }
     }
+
+    public ArrayList<Vertex> DepthFirstSearch(int VFrom, int VTo) {
+        Stack<Vertex> stack = new Stack<>();
+        ArrayList<Vertex> path = new ArrayList<>();
+
+        // Reset Hit flag for all vertices
+        for (Vertex v : vertex) {
+            if (v != null) {
+                v.Hit = false;
+            }
+        }
+        if (VFrom == VTo) {
+            return path;
+        }
+
+        // Push starting vertex onto stack
+        Vertex start = vertex[VFrom];
+        stack.push(start);
+        start.Hit = true;
+
+        while (!stack.empty()) {
+            Vertex current = stack.peek();
+
+            // If the current vertex is the target vertex, build and return the path
+            if (current.Value == vertex[VTo].Value) {
+                while (!stack.empty()) {
+                    path.add(stack.pop());
+                }
+                Collections.reverse(path);
+                return path;
+            }
+
+            // Look for an unvisited adjacent vertex
+            boolean found = false;
+            for (int i = 0; i < max_vertex; i++) {
+                if (m_adjacency[current.Value][i] == 1 && !vertex[i].Hit) {
+                    found = true;
+                    Vertex next = vertex[i];
+                    stack.push(next);
+                    next.Hit = true;
+                    break;
+                }
+            }
+
+            // If no unvisited adjacent vertex was found, pop the current vertex from the stack
+            if (!found) {
+                stack.pop();
+            }
+        }
+
+        // If the target vertex was not found, return an empty path
+        return path;
+    }
+
 }
 
