@@ -71,18 +71,19 @@ class SimpleGraph {
         ArrayList<Vertex> startPath = new ArrayList<>();  // Create the initial path
         startPath.add(vertex[VFrom]);
         queue.add(startPath);  // Add the initial path to the queue
+        boolean[] visited = new boolean[max_vertex]; // Create an array to store visited vertices
 
         while (!queue.isEmpty()) {  // While the queue is not empty
             ArrayList<Vertex> currentPath = queue.poll();  // Dequeue the current path
             Vertex currentVertex = currentPath.get(currentPath.size() - 1);  // Get the current vertex from the end of the path
-            currentVertex.Hit = true;  // Mark the current vertex as visited
+            visited[GetIndex(currentVertex)] = true;  // Mark the current vertex as visited
 
             if (currentVertex == vertex[VTo]) {  // If the current vertex is the destination vertex
                 return currentPath;  // Return the current path
             }
 
             for (int i = 0; i < max_vertex; i++) {  // Loop through all vertices
-                if (m_adjacency[GetIndex(currentVertex)][i] == 1 && !vertex[i].Hit) {  // If the vertex is adjacent and unvisited
+                if (m_adjacency[GetIndex(currentVertex)][i] == 1 && !visited[i]) {  // If the vertex is adjacent and unvisited
                     ArrayList<Vertex> newPath = new ArrayList<>(currentPath);  // Create a new path from the current path
                     newPath.add(vertex[i]);  // Add the adjacent vertex to the new path
                     queue.add(newPath);  // Add the new path to the queue
@@ -101,6 +102,7 @@ class SimpleGraph {
         }
         return -1;
     }
+
 
 }
 
