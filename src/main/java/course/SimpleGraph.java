@@ -16,11 +16,13 @@ class SimpleGraph {
     Vertex[] vertex;
     int[][] m_adjacency;
     int max_vertex;
+    ArrayList<Vertex> currentPath;
 
     public SimpleGraph(int size) {
         max_vertex = size;
         m_adjacency = new int[size][size];
         vertex = new Vertex[size];
+        currentPath = new ArrayList<>();
     }
 
     public void AddVertex(int value) {
@@ -64,58 +66,42 @@ class SimpleGraph {
         }
     }
 
-    public ArrayList<Vertex> DepthFirstSearch(int VFrom, int VTo) {
-        Stack<Vertex> stack = new Stack<>();
-        ArrayList<Vertex> path = new ArrayList<>();
+    public ArrayList<Vertex> BreadthFirstSearch(int VFrom, int VTo) {
+        Queue<ArrayList<Vertex>> queue = new LinkedList<>();  // Create a queue to store paths
+        ArrayList<Vertex> startPath = new ArrayList<>();  // Create the initial path
+        startPath.add(vertex[VFrom]);
+        queue.add(startPath);  // Add the initial path to the queue
 
-        // Reset Hit flag for all vertices
-        for (Vertex v : vertex) {
-            if (v != null) {
-                v.Hit = false;
-            }
-        }
-        if (VFrom == VTo) {
-            return path;
-        }
+        while (!queue.isEmpty()) {  // While the queue is not empty
+            ArrayList<Vertex> currentPath = queue.poll();  // Dequeue the current path
+            Vertex currentVertex = currentPath.get(currentPath.size() - 1);  // Get the current vertex from the end of the path
+            currentVertex.Hit = true;  // Mark the current vertex as visited
 
-        // Push starting vertex onto stack
-        Vertex start = vertex[VFrom];
-        stack.push(start);
-        start.Hit = true;
-
-        while (!stack.empty()) {
-            Vertex current = stack.peek();
-
-            // If the current vertex is the target vertex, build and return the path
-            if (current.Value == vertex[VTo].Value) {
-                while (!stack.empty()) {
-                    path.add(stack.pop());
-                }
-                Collections.reverse(path);
-                return path;
+            if (currentVertex == vertex[VTo]) {  // If the current vertex is the destination vertex
+                return currentPath;  // Return the current path
             }
 
-            // Look for an unvisited adjacent vertex
-            boolean found = false;
-            for (int i = 0; i < max_vertex; i++) {
-                if (m_adjacency[current.Value][i] == 1 && !vertex[i].Hit) {
-                    found = true;
-                    Vertex next = vertex[i];
-                    stack.push(next);
-                    next.Hit = true;
-                    break;
+            for (int i = 0; i < max_vertex; i++) {  // Loop through all vertices
+                if (m_adjacency[GetIndex(currentVertex)][i] == 1 && !vertex[i].Hit) {  // If the vertex is adjacent and unvisited
+                    ArrayList<Vertex> newPath = new ArrayList<>(currentPath);  // Create a new path from the current path
+                    newPath.add(vertex[i]);  // Add the adjacent vertex to the new path
+                    queue.add(newPath);  // Add the new path to the queue
                 }
             }
-
-            // If no unvisited adjacent vertex was found, pop the current vertex from the stack
-            if (!found) {
-                stack.pop();
-            }
         }
 
-        // If the target vertex was not found, return an empty path
-        return path;
+        return new ArrayList<>();  // Return an empty path if no path is found
+    }
+
+    private int GetIndex(Vertex vertex) {
+        for (int i = 0; i < max_vertex; i++) {
+            if (this.vertex[i] == vertex) {
+                return i;
+            }
+        }
+        return -1;
     }
 
 }
+
 
