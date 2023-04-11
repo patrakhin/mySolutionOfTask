@@ -1,11 +1,12 @@
+/*
 package course;
 
 import java.util.*;
 
-class Vertex_17 {
+class Vertex {
     public int Value;
     public boolean Hit;
-    public Vertex_17(int val)
+    public Vertex(int val)
     {
         Value = val;
         Hit = false;
@@ -13,20 +14,20 @@ class Vertex_17 {
 }
 
 class SimpleGraph_17 {
-    Vertex_17[] vertex;
+    Vertex[] vertex;
     int[][] m_adjacency;
     int max_vertex;
 
     public SimpleGraph_17(int size) {
         max_vertex = size;
         m_adjacency = new int[size][size];
-        vertex = new Vertex_17[size];
+        vertex = new Vertex[size];
     }
 
     public void AddVertex(int value) {
         for (int i = 0; i < max_vertex; i++) {
             if (vertex[i] == null) {
-                vertex[i] = new Vertex_17(value);
+                vertex[i] = new Vertex(value);
                 return;
             }
         }
@@ -64,12 +65,12 @@ class SimpleGraph_17 {
         }
     }
 
-    public ArrayList<Vertex_17> DepthFirstSearch(int VFrom, int VTo) {
-        Stack<Vertex_17> stack = new Stack<>();
-        ArrayList<Vertex_17> path = new ArrayList<>();
+    public ArrayList<Vertex> DepthFirstSearch(int VFrom, int VTo) {
+        Stack<Vertex> stack = new Stack<>();
+        ArrayList<Vertex> path = new ArrayList<>();
 
         // Reset Hit flag for all vertices
-        for (Vertex_17 v : vertex) {
+        for (Vertex v : vertex) {
             if (v != null) {
                 v.Hit = false;
             }
@@ -79,12 +80,12 @@ class SimpleGraph_17 {
         }
 
         // Push starting vertex onto stack
-        Vertex_17 start = vertex[VFrom];
+        Vertex start = vertex[VFrom];
         stack.push(start);
         start.Hit = true;
 
         while (!stack.empty()) {
-            Vertex_17 current = stack.peek();
+            Vertex current = stack.peek();
 
             // If the current vertex is the target vertex, build and return the path
             if (current.Value == vertex[VTo].Value) {
@@ -100,7 +101,7 @@ class SimpleGraph_17 {
             for (int i = 0; i < max_vertex; i++) {
                 if (m_adjacency[current.Value][i] == 1 && !vertex[i].Hit) {
                     found = true;
-                    Vertex_17 next = vertex[i];
+                    Vertex next = vertex[i];
                     stack.push(next);
                     next.Hit = true;
                     break;
@@ -119,3 +120,4 @@ class SimpleGraph_17 {
 
 }
 
+*/
